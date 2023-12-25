@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Fraction Math Question</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+
+  <style>
+   body{
+    text-align: center;
+   }
+    #questiondiv{
+     
+      background-color: white;
+      box-shadow: 10px 10px 30px grey;
+      padding-top:10px;
+      padding-bottom:10px;
+      font-size:25px;
+      height:90%;
+      margin-left:1%;
+    }
+    #question{
+      float:left;
+      margin-bottom:10px;
+      display: inline;
+      
+    }
+    .imgdiv{
+      background-color: white;
+      box-shadow: 10px 10px 30px grey;
+      text-align: center;
+      padding-top:10px;
+      padding-bottom:10px;
+      height:90%;
+    }
+    li{
+      list-style-type: none;
+      margin-right:10px;
+    
+    }
+    #result{
+      font-size: 25px;
+    }
+    button{
+      margin:10px;
+    }
+    .menu{
+      text-align:initial;
+      background-color: aquamarine;
+    }
+    .maindiv{
+        background-color: orange;
+        height: 400px;
+        padding-top:10px;
+    }
+  
+  </style>
+
+</head>
+<body>
+
+<div class="header" style="width:100%; background-color:rgba(255, 255, 255, 0)">
+   <img src="Logo.png" width="12%" style="float:left; margin-top:10px" class="img-responsive">
+   <span> <img src="header.png" width="50%" height="100px"; class="img-responsive"></span>
+</div>
+<br>
+<br>
+  <center>
+  <h1>First Meet</h1>
+  <div class="maindiv container">
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 imgdiv"><img id ="math_ques" src="MAth Question.jpg" width="70%" height="90%"></div>
+  <div id="questiondiv" class="col-lg-7 col-md-7 col-sm-7 col-xs-8">
+    <div id="question"></div>
+    <br><br>
+  <div class="menu"><br><ul id="options"></ul></div>
+  <button id="subbtn" onclick="checkAnswer()">Submit Answer</button>
+  <button id="nextbtn" onclick="newques()" style="display:none">Next</button>
+  <p id="result"></p>
+  </div>
+</div>
+  <script>
+    // Define an array of questions and their options
+    var questions = [
+      {
+        question: "Select The number smaller than 124",
+        options: ["171", "311", "121", "124"],
+        answer: "121"
+      },
+      {
+        question: "Guess the correct ascending order of 32, 51, 39, 65",
+        options: ["32, 39, 51, 65", "65, 51, 39, 32", "39, 32, 65,51"],
+        answer: "32, 39, 51, 65"
+      },
+      {
+        question: "Write the expanded form of 268",
+        options: ["2 + 6 + 8", "20 + 60 + 8", "200 + 60 +8", "26 + 8"],
+        answer: "200 + 60 +8"
+      },
+
+      {
+        question: "What is 342 + 204 ",
+        options: ["346", "546", "506", "586"],
+        answer: "546"
+      },
+
+      {
+        question: "what 235 + 75",
+        options: ["985", "980", "310", "160"],
+        answer: "310"
+      },
+
+      {
+        question: "Multiply 32 X 4",
+        options: ["128", "432", "36", "29"],
+        answer: "128"
+      },
+
+      {
+        question: "There are 15 candies in one packet. How many would be in 5 packets",
+        options: ["60", "75", "5", "20"],
+        answer: "75"
+
+      },
+
+      {
+        question: "Write the fraction of pizza that he ate",
+        options: ["2/8", "1/4", "1/8", "1"],
+        answer: "1/8"
+      },
+
+      {
+        question: "There are 52 student in a room. 30 are girls. How many are boys ",
+        options: ["30", "12", "22", "20"],
+        answer: "22"
+      },
+
+      {
+        question: "Complete the pattern  5, 8, 11, 14, 17, ?",
+        options: ["19", "20", "16", "21"],
+        answer: "20"
+
+      },
+
+
+      // Add more questions here
+    ];
+
+    //define the array of images
+
+    var img= ["1.png", "2.png", "3.png", "4.png", "5.png", "6.png", "7.png", "8.png", "9.png", "10.png"]
+    
+    // Get a random question from the array
+
+    var randomQuestion = questions[0];
+    var updatedimage = img[0]
+    document.getElementById("math_ques").src = updatedimage
+    document.getElementById("question").innerHTML = randomQuestion.question;
+    
+    randomQuestion.options.forEach(function(option) {
+      var li = document.createElement("li");
+      li.innerHTML = '<input type="radio" name="answer" value="' + option + '"> ' + option;
+      document.getElementById("options").appendChild(li);
+    });
+
+// Create a function here like family array project of Byjus to display next question \
+    // from array everytime instead of random question
+    var i=1;
+    var count=questions.length
+    function newques(){
+      if(i==count){
+        document.getElementById("question").innerHTML=""
+        document.getElementById("options").innerHTML="Well Done"
+      document.getElementById("result").innerHTML =""
+      document.getElementById("nextbtn").style.display="none"
+      }
+      else{
+      document.getElementById("options").innerHTML=""
+      document.getElementById("result").innerHTML =""
+      
+      randomQuestion = questions[i];
+      updatedimage= img[i]
+      // Display the question and options on the page
+    document.getElementById("question").innerHTML = randomQuestion.question;
+    document.getElementById("math_ques").src = updatedimage
+    
+    randomQuestion.options.forEach(function(option) {
+      var li = document.createElement("li");
+      li.innerHTML = '<input type="radio" name="answer" value="' + option + '"> ' + option;
+      document.getElementById("options").appendChild(li);
+    });
+    document.getElementById("subbtn").style.display="inline-block"
+        document.getElementById("nextbtn").style.display="none"
+
+    i++;
+    }
+  }
+    
+    
+    // Check the selected answer against the correct answer
+    function checkAnswer() {
+      var selectedAnswer = document.querySelector('input[name="answer"]:checked').value;
+      if (selectedAnswer === randomQuestion.answer) {
+        document.getElementById("result").innerHTML = "Correct! 😀" ;
+        document.getElementById("subbtn").style.display="none"
+        document.getElementById("nextbtn").style.display="inline-block"
+      } else {
+        document.getElementById("result").innerHTML = "Incorrect! 😔";
+      }
+    }
+  </script>
+</center>
+</body>
+</html>
